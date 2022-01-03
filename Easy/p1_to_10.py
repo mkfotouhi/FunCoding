@@ -33,5 +33,5 @@ Constraints:
 """
 
 
-def isPalindrome(x: int) -> bool:
+def isPalindrome_mkf(x: int) -> bool:
     return True
