@@ -34,4 +34,13 @@ Constraints:
 
 
 def isPalindrome_mkf(x: int) -> bool:
-    return True
+    '''
+    Runtime: 56 ms, faster than 81.44% of Python3 online submissions for Palindrome Number.
+    Memory Usage: 14.3 MB, less than 15.65% of Python3 online submissions for Palindrome Number.
+    '''
+    s = str(x)
+    flag = True
+    for i in range(len(s) // 2):
+        if s[i] != s[-(i + 1)]:
+            flag = False
+    return flag
