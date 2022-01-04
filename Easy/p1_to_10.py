@@ -61,3 +61,16 @@ def Fateme(x: int) -> bool: #return true if x is palindrome integer.
 
 Fateme(1000021)
 
+def isPalindrome_Salman(x: int) -> bool:
+    """
+    :type x: int
+    :rtype: bool
+    """
+    x_str = str(x)
+    len_str = len(x_str)
+    if len_str == 1:
+        return True
+    elif x_str[0: len_str//2: 1] == x_str[len_str-1:len_str-1-len_str//2:-1]:
+        return True
+    else:
+        return False
