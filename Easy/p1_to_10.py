@@ -28,9 +28,10 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
 Constraints:
 
--231 <= x <= 231 - 1
+-2^31 <= x <= 2^31 - 1
 
 """
+
 
 
 def isPalindrome_mkf(x: int) -> bool:
@@ -44,3 +45,19 @@ def isPalindrome_mkf(x: int) -> bool:
         if s[i] != s[-(i + 1)]:
             flag = False
     return flag
+
+
+def Fateme(x: int) -> bool: #return true if x is palindrome integer.
+    if -2**31 <= x and x <= (2**31 -1):
+        x_str = str(x)
+        if len(x_str) == 1:
+            return True
+        for i in range(int(len(x_str)/2)):
+            if x_str[i] != x_str[-i-1]:
+                return False
+        return True
+    else:
+        return False
+
+Fateme(1000021)
+
