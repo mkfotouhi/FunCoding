@@ -25,9 +25,26 @@ Constraints:
 0 <= strs[i].length <= 200
 strs[i] consists of only lower-case English letters."""
 
-class Solution(object):
-    def longestCommonPrefix(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: str
-        """
+
+def longestCommonPrefix( strs):
+    """
+    :type strs: List[str]
+    :rtype: str
+    """
+    size = len(strs)
+    if size == 0:
+        return ""
+    if size == 1:
+        return strs[0]
+    strs.sort()
+    end = min(len(strs[0]), len(strs[size - 1]))
+
+    i = 0
+    while (i < end and
+           strs[0][i] == strs[size - 1][i]):
+        i += 1
+
+    output = strs[0][:i]
+    return output
+
+longestCommonPrefix(["flower","flow","flight"])
