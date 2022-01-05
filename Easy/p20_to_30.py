@@ -28,7 +28,29 @@ Constraints:
 1 <= s.length <= 104
 s consists of parentheses only '()[]{}'."""
 
-class Solution(object):
-    def removeElement(self, nums, val):
 
-    	return True
+def isValid_mkf(s: str) -> bool:
+    open_lst = ['(', '[', '{']
+    close_lst = [')', ']', '}']
+    stack = []
+    flag = True
+    for ch in s:
+        if ch in open_lst:
+            stack.append(ch)
+        else:
+            if len(stack) > 0:
+                if open_lst[close_lst.index(ch)] == stack[-1]:
+                    stack.pop()
+                    continue
+                else:
+                    flag = False
+            else:
+                flag = False
+    if len(stack) > 0:
+        flag = False
+
+    return flag
+
+
+assert (isValid_mkf('{[()]}') is True)
+assert (isValid_mkf('{[()]') is False)
