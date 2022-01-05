@@ -28,7 +28,7 @@ strs[i] consists of only lower-case English letters."""
 
 
 
-def longestCommonPrefix_mkf(self, strs):
+def longestCommonPrefix_mkf(strs):
     '''
     Runtime: 67 ms, faster than 5.11% of Python3 online submissions for Longest Common Prefix.
     Memory Usage: 14.3 MB, less than 82.17% of Python3 online submissions for Longest Common Prefix.
@@ -51,11 +51,11 @@ def longestCommonPrefix_mkf(self, strs):
     return pr
 
 
-out = longestCommonPrefix(["flower", "flow", "flight"])
+out = longestCommonPrefix_mkf(["flower", "flow", "flight"])
 print(out)
-out = longestCommonPrefix(['car', ''])
+out = longestCommonPrefix_mkf(['car', ''])
 print(out)
-out = longestCommonPrefix(["flower"])
+out = longestCommonPrefix_mkf(["flower"])
 print(out)
 
 
