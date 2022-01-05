@@ -25,9 +25,25 @@ Constraints:
 0 <= strs[i].length <= 200
 strs[i] consists of only lower-case English letters."""
 
-class Solution(object):
-    def longestCommonPrefix(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: str
-        """
+def fati_sal(strs):
+    """
+    :type strs: List[str]
+    :rtype: str
+    """
+    output = strs[0] if len(strs)==1 else ''
+    letters = ''        
+    for i, letter in enumerate(strs[0]):
+        letters = letters + letter
+        for word in strs[1:]:
+            if len(strs[0]) == len(letters):
+                output = letters
+            if letters != word[:i+1]:
+                output = letters[:-1]
+                break
+        else:
+            continue
+        break
+
+    return output
+
+print(fati_sal(["flow","flow"]))
