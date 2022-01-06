@@ -29,6 +29,41 @@ Constraints:
 s consists of parentheses only '()[]{}'."""
 
 class Solution(object):
-    def removeElement(self, nums, val):
 
-    	return True
+    def Fateme(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+
+        stack = []
+
+        # Traversing the Expression
+        for char in s:
+            if char in ["(", "{", "["]:
+
+                # Push the element in the stack
+                stack.append(char)
+            else:
+
+                # IF current character is not opening
+                # bracket, then it must be closing.
+                # So stack cannot be empty at this point.
+                if not stack:
+                    return False
+                current_char = stack.pop()
+                if current_char == '(':
+                    if char != ")":
+                        return False
+                if current_char == '{':
+                    if char != "}":
+                        return False
+                if current_char == '[':
+                    if char != "]":
+                        return False
+
+
+        return not stack
+
+ss = '(){}[]'
+Solution().Fateme(ss)
