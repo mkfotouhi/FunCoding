@@ -29,6 +29,21 @@ Constraints:
 s consists of parentheses only '()[]{}'."""
 
 class Solution(object):
-    def removeElement(self, nums, val):
+    def fati_sal(self, s):
 
-    	return True
+        dic_item = {"(": ")", "[": "]", "{": "}"}
+        pair = []
+        for item in s:
+            if item in dic_item.keys():
+                pair.append(dic_item[item])
+            else:
+                if not pair:
+                    return False
+                elif item == pair[-1]:
+                    pair.pop()
+                else:
+                    return False
+        return not pair
+
+obj = Solution()
+print(obj.fati_sal("(])"))
