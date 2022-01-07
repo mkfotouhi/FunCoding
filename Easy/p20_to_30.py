@@ -74,9 +74,6 @@ class Solution(object):
                     return False
         return not pair
 
-#obj = Solution()
-#print(obj.fati_sal("(])"))
-
 
 def Fateme(s):
     """
@@ -186,3 +183,54 @@ class Solution:
         return dummy.next
 
 
+def mergeTwoLists_mkf(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    """
+    Runtime: 40 ms, faster than 54.38% of Python3 online submissions for Merge Two Sorted Lists.
+    Memory Usage: 14.4 MB, less than 31.72% of Python3 online submissions for Merge Two Sorted Lists.
+    """
+    if list1 is None:
+        return list2
+    if list2 is None:
+        return list1
+
+    head = list1
+    if list2.val <= list1.val:
+        head = list2
+    cur1 = list1
+    cur2 = list2
+    cur = None
+    prev = None
+    while not ((cur1 is None) & (cur2 is None)):
+        if cur1 is None:
+            prev = cur
+            prev.next = cur2
+            cur2 = None
+        elif cur2 is None:
+            prev = cur
+            prev.next = cur1
+            cur1 = None
+        else:
+            if cur1.val <= cur2.val:
+                node_new = ListNode(cur1.val)
+                cur1 = cur1.next
+            else:
+                node_new = ListNode(cur2.val)
+                cur2 = cur2.next
+
+            if cur is None:
+                head = node_new
+                # prev = node_new
+            else:
+                prev = cur
+                prev.next = node_new
+            cur = node_new
+    return head
+
+
+list1 = ListNode(0, ListNode(2, ListNode(4)))
+list2 = ListNode(0, ListNode(1, ListNode(3)))
+n = mergeTwoLists_mkf(list1, list2)
+while n is not None:
+    print(n.val)
+    n = n.next
+print()
