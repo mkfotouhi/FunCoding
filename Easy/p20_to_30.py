@@ -155,8 +155,46 @@ class ListNode:
         self.next = next
 
 
-def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-    pass
+class Solution:
+    def mergeTwoLists(self, list1, list2):
 
+        final_list_o = ListNode()
+        final_list = final_list_o
 
+        while list1 or list2:
+            if list1 and list2 and list1.val <= list2.val:
+                final_list.next = ListNode(list1.val)
+                final_list = final_list.next
+                list1 = list1.next
+            elif list1 and list2 and list1.val > list2.val:
+                final_list.next = ListNode(list2.val)
+                final_list = final_list.next
+                list2 = list2.next
+            elif list1 and not list2:
+                final_list.next = ListNode(list1.val)
+                final_list = final_list.next
+                list1 = list1.next
+            else:
+                final_list.next = ListNode(list2.val)
+                final_list = final_list.next
+                list2 = list2.next
 
+        return final_list_o.next
+
+list1_1 = ListNode(1)
+list1_2 = ListNode(2)
+list1_3 = ListNode(4)
+list1_1.next = list1_2
+list1_2.next = list1_3
+
+list2_1 = ListNode(1)
+list2_2 = ListNode(3)
+list2_3 = ListNode(4)
+list2_1.next = list2_2
+list2_2.next = list2_3
+
+# temp = list1_1
+# while temp:
+#   print(temp.val)
+#   temp = temp.next
+Solution().mergeTwoLists(list1_1, list2_1)
