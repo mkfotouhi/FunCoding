@@ -74,8 +74,8 @@ class Solution(object):
                     return False
         return not pair
 
-obj = Solution()
-print(obj.fati_sal("(])"))
+#obj = Solution()
+#print(obj.fati_sal("(])"))
 
 
 def Fateme(s):
@@ -111,8 +111,8 @@ def Fateme(s):
                     return False
 
     return not stack
-ss = '(){}[]'
-Fateme(ss)
+#ss = '(){}[]'
+#Fateme(ss)
 
 # *******************************************************
 # ************  problem 4  (21 on LeetCode)  *************
@@ -154,9 +154,35 @@ class ListNode:
         self.val = val
         self.next = next
 
+class Solution:
+    def Fati_Sal_mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
 
-def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-    pass
+        # create dummy node so we can compare the first node in each list
+        dummy = ListNode()
+        # initialise current node pointer
+        curr = dummy
+        # while the lists are valid
+        while list1 and list2:
+            # if the value is list1 is less than the value in list2
+            if list1.val < list2.val:
+                # the next node in the list will be the list1 node
+                curr.next = list1
+                list1 = list1.next
+            else:
+                # if not then the next node in the list will be the list2 node
+                curr.next = list2
+                list2 = list2.next
+                # increment node
+            curr = curr.next
+        # if list1 node is valid but not list2 node add the rest of the nodes from list1
+        if list1:
+            curr.next = list1
 
+        # if list2 node is valid but not list1 node add the rest of the nodes from list2
+        elif list2:
+            curr.next = list2
+
+        # return the head of the merged list
+        return dummy.next
 
 
