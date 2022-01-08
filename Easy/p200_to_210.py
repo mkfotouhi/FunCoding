@@ -31,14 +31,31 @@ range[0, 5000].
 -5000 <= Node.val <= 5000"""
 
 
-class ListNode:
+class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
-#def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-#    pass
+class Solution_Salman(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        reverse = ListNode(head.val) if head else head
+
+        while head:
+            head = head.next
+            if head:
+                current = ListNode(head.val, reverse)
+                reverse = current
+
+        return reverse
+
+list1 = ListNode(0, ListNode(2, ListNode(4)))
+
+Solution_Salman().reverseList(list1)
 
 
 ### example
@@ -65,3 +82,4 @@ def reverseList_fati(head):
 
 
 print(reverseList_fati(list_rev).val)
+
