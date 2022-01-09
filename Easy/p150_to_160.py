@@ -42,7 +42,7 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin.
 """
 
 
-class MinStack:
+class MinStack_mkf:
     """
     Runtime: 100 ms, faster than 32.66% of Python3 online submissions for Min Stack.
     Memory Usage: 18.4 MB, less than 26.42% of Python3 online submissions for Min Stack.
@@ -77,7 +77,7 @@ class MinStack:
         return self.min
 
 # Your MinStack object will be instantiated and called as such:
-obj = MinStack()
+obj = MinStack_mkf()
 obj.push(-3)
 obj.push(1)
 obj.pop()
