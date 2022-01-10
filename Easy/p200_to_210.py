@@ -66,6 +66,31 @@ third = ListNode(3)
 list_rev.next = second
 second.next = third
 
+def reverseList_mkf(head):
+    """
+    Runtime: 32 ms, faster than 89.01% of Python3 online submissions for Reverse Linked List.
+    Memory Usage: 16.5 MB, less than 20.89% of Python3 online submissions for Reverse Linked List.
+    """
+    if head:
+        if head.next:
+            cur = head
+            next_cur = cur.next
+            out = ListNode(head.val)
+            while next_cur is not None:
+                cur = next_cur
+                out = ListNode(cur.val, out)
+                next_cur = cur.next
+            return out
+        else:
+            return head
+    else:
+        return head
+
+
+print(reverseList_mkf(list_rev).val)
+print(reverseList_mkf(ListNode(0)).val)
+
+
 
 def reverseList_fati(head):
     if head:
