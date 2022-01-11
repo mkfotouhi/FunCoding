@@ -26,5 +26,23 @@ Constraints:
 s consists of only lowercase English letters.
 """
 
-def firstUniqChar(self, s: str) -> int:
-    pass
+def firstUniqChar_mkf(s: str) -> int:
+    """
+    Runtime: 263 ms, faster than 12.23% of Python3 online submissions for First Unique Character in a String.
+    Memory Usage: 14.4 MB, less than 70.98% of Python3 online submissions for First Unique Character in a String.
+    """
+    ind_dict = dict()
+    for i, ch in enumerate(s):
+        if ch in ind_dict.keys():
+            ind_dict[ch] += 1
+        else:
+            ind_dict[ch] = 1
+    for i, ch in enumerate(s):
+        if ind_dict[ch] == 1:
+            return i
+    return -1
+
+print(firstUniqChar_mkf('lee'))
+print(firstUniqChar_mkf('leetcode'))
+print(firstUniqChar_mkf('loveleetcode'))
+print(firstUniqChar_mkf('aabb'))
