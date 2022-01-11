@@ -26,5 +26,11 @@ Constraints:
 s consists of only lowercase English letters.
 """
 
-def firstUniqChar(self, s: str) -> int:
-    pass
+def firstUniqChar_fati(s: str):
+    for i, letter in enumerate(s):
+        if s.count(letter) == 1:
+            return i
+    else:
+        return -1
+
+print(firstUniqChar_fati("leetcode"))
