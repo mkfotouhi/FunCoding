@@ -30,10 +30,29 @@ range[0, 100].
 -104 <= Node.val <= 104 """
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-#class Solution:
-#    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+from typing import Optional
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+def isSameTree_mkf(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+    """
+    Runtime: 39 ms, faster than 27.01% of Python3 online submissions for Same Tree.
+    Memory Usage: 14.2 MB, less than 86.07% of Python3 online submissions for Same Tree.
+    """
+    if not p and not q:
+        return True
+    # one of p and q is None
+    if not q or not p:
+        return False
+    if p.val != q.val:
+        return False
+    return isSameTree_mkf(p.right, q.right) and isSameTree_mkf(p.left, q.left)
+
+
+
+
+
