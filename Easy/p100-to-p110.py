@@ -1,3 +1,6 @@
+# *******************************************************
+# ************  problem 7  (100 on LeetCode)  *************
+# *******************************************************
 """
 Given the roots of two binary trees p and q, write a function to check if they are the same or not.
 
@@ -38,6 +41,15 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+p = TreeNode(1)
+p_left = TreeNode(2)
+p.left = p_left
+
+q = TreeNode(1)
+q_left = TreeNode(1)
+q.left = q_left
+
 def isSameTree_mkf(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     """
     Runtime: 39 ms, faster than 27.01% of Python3 online submissions for Same Tree.
@@ -53,6 +65,18 @@ def isSameTree_mkf(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     return isSameTree_mkf(p.right, q.right) and isSameTree_mkf(p.left, q.left)
 
 
+def isSameTree_Fati(p, q) -> bool:
+    flag = True
+    if p and q and p.val == q.val:
+        flag = isSameTree_Fati(p.left, q.left)
+        if flag:
+            flag = isSameTree_Fati(p.right, q.right)
+    elif ((not q) and p) or ((not p) and q):
+        flag = False
+    elif p and q and p.val != q.val:
+        flag = False
+    return flag
+print(isSameTree_Fati(p,q))
 
 
 
