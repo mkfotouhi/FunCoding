@@ -55,3 +55,20 @@ print(firstUniqChar_mkf('lee'))
 print(firstUniqChar_mkf('leetcode'))
 print(firstUniqChar_mkf('loveleetcode'))
 print(firstUniqChar_mkf('aabb'))
+
+
+def firstUniqChar_Salman(s):
+    """
+    :type s: str
+    :rtype: int
+    """
+    d = {}
+    for index, letter in enumerate(s):
+        if letter in d.keys():
+            d[letter] = -1
+        else:
+            d[letter] = index
+    for i in d.keys():
+        if d[i] != -1:
+            return d[i]
+    return -1
