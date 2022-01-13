@@ -78,5 +78,3 @@ def isSameTree_Fati(p, q) -> bool:
     return flag
 print(isSameTree_Fati(p,q))
 
-
-
