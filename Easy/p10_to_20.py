@@ -70,6 +70,22 @@ print(romanToInt_mkf('IX'))
 print(romanToInt_mkf('CM'))
 print(romanToInt_mkf('XC'))
 
+s="XXII"
+
+def romanToInt_salman(s: str) -> int:
+    list_s = list(s)
+    roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C":100, "D":500, "M": 1000}
+    temp = roman[list_s[0]]
+    value = temp
+    for letter in list_s[1:]:
+        if temp < roman[letter] :
+            value += roman[letter] - 2 * temp
+        else:
+            value += roman[letter]
+            temp = roman[letter]
+    return value
+
+romanToInt_salman(s)
 
 
 
