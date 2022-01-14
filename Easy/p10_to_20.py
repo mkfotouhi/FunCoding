@@ -68,8 +68,8 @@ def romanToInt_fati(s: str) -> int:
             list_s.pop(0)
     return sum_rom
 
-
 print(romanToInt_fati("MCMXCIV"))
+
 # *******************************************************
 # ************  problem 2  (14 on LeetCode)  *************
 # *******************************************************
