@@ -46,6 +46,31 @@ Constraints:
 s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 """
+def romanToInt_mkf(s: str) -> int:
+    """
+    Runtime: 61 ms, faster than 31.83% of Python3 online submissions for Roman to Integer.
+    Memory Usage: 14.4 MB, less than 28.23% of Python3 online submissions for Roman to Integer.
+    """
+    roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    val = 0
+    for i in range(len(s)):
+        if i + 1 < len(s):
+            if roman_dict[s[i]] >= roman_dict[s[i + 1]]:
+                val += roman_dict[s[i]]
+            else:
+                val += - roman_dict[s[i]]
+        else:
+            val += roman_dict[s[i]]
+    return val
+
+
+print(romanToInt_mkf('VII'))
+print(romanToInt_mkf('XXII'))
+print(romanToInt_mkf('IX'))
+print(romanToInt_mkf('CM'))
+print(romanToInt_mkf('XC'))
+
+
 
 def romanToInt_fati(s: str) -> int:
 
