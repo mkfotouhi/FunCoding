@@ -19,7 +19,7 @@ Roman numerals are usually written largest to smallest from left to right. Howev
 I can be placed before V (5) and X (10) to make 4 and 9.
 X can be placed before L (50) and C (100) to make 40 and 90.
 C can be placed before D (500) and M (1000) to make 400 and 900.
-Given a roman numeral, convert it to an integer.
+Given a roman numeral, convert it to an integer. CMXCIX
 
 
 
@@ -88,6 +88,28 @@ def romanToInt_salman(s: str) -> int:
 romanToInt_salman(s)
 
 
+def romanToInt_fati(s: str) -> int:
+
+    dic_roman = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    index_roman = {"I": 0, "V": 1, "X": 2, "L": 3, "C": 4, "D": 5, "M": 6}
+
+    list_s = list(s)
+    sum_rom = 0
+    while list_s:
+        if len(list_s) > 1:
+            if index_roman[list_s[0]] < index_roman[list_s[1]]:
+                sum_rom += (dic_roman[list_s[1]] - dic_roman[list_s[0]])
+                list_s.pop(1)
+                list_s.pop(0)
+            else:
+                sum_rom += dic_roman[list_s[0]]
+                list_s.pop(0)
+        else:
+            sum_rom += dic_roman[list_s[0]]
+            list_s.pop(0)
+    return sum_rom
+
+print(romanToInt_fati("MCMXCIV"))
 
 # *******************************************************
 # ************  problem 2  (14 on LeetCode)  *************
@@ -142,12 +164,12 @@ def longestCommonPrefix_mkf(strs):
     return pr
 
 
-out = longestCommonPrefix_mkf(["flower", "flow", "flight"])
-print(out)
-out = longestCommonPrefix_mkf(['car', ''])
-print(out)
-out = longestCommonPrefix_mkf(["flower"])
-print(out)
+#out = longestCommonPrefix_mkf(["flower", "flow", "flight"])
+#print(out)
+#out = longestCommonPrefix_mkf(['car', ''])
+#print(out)
+#out = longestCommonPrefix_mkf(["flower"])
+#print(out)
 
 
 def fati_sal(strs):
@@ -171,7 +193,7 @@ def fati_sal(strs):
 
     return output
 
-print(fati_sal(["flow","flow"]))
+#print(fati_sal(["flow","flow"]))
 
 
 def longestCommonPrefix_Salman( strs):
@@ -195,6 +217,6 @@ def longestCommonPrefix_Salman( strs):
     output = strs[0][:i]
     return output
 
-longestCommonPrefix_Salman(["flower","flow","flight"])
+#longestCommonPrefix_Salman(["flower","flow","flight"])
 
 
