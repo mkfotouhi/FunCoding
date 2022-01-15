@@ -32,6 +32,28 @@ Constraints:
 
 1 <= n <= 2^31 - 1"""
 
+def isHappy_mkf(n: int) -> bool:
+    if n < 10:
+        sum = n
+        r_cur = 0
+    else:
+        sum = 0
+        r_cur = n
+    while r_cur > 0:
+        m = r_cur % 10
+        r_cur = r_cur//10
+        sum += m**2
+    if sum == 1:
+        return True
+    elif sum < 10:
+        return False
+    else:
+        return isHappy_mkf(sum)
+
+print(isHappy_mkf(100))
+print(isHappy_mkf(2))
+print(isHappy_mkf(19))
+
 # *******************************************************
 # ************  problem 5  (206 on LeetCode)  *************
 # *******************************************************
