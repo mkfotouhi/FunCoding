@@ -32,6 +32,31 @@ Constraints:
 
 1 <= n <= 2^31 - 1"""
 
+def isHappy_fati1(n) -> bool: ## Run time error for some cases!
+    try:
+        if n == 1:
+            return True
+        else:
+            n = sum(list(map(lambda x: pow(int(x), 2), list(str(n)))))
+            return isHappy_fati1(n)
+    except RecursionError:
+        return False
+
+#print(isHappy_fati2(2))
+
+def isHappy_fati2(n) -> bool:
+    prev = set()
+    while n != 1:
+        n = sum(list(map(lambda x: pow(int(x), 2), list(str(n)))))
+
+        if n in prev:
+            return False
+        prev.add(n)
+
+    else:
+        return True
+
+print(isHappy_fati2(19))
 # *******************************************************
 # ************  problem 5  (206 on LeetCode)  *************
 # *******************************************************
@@ -121,9 +146,8 @@ def reverseList_mkf(head):
         return head
 
 
-print(reverseList_mkf(list_rev).val)
-print(reverseList_mkf(ListNode(0)).val)
-
+#print(reverseList_mkf(list_rev).val)
+#print(reverseList_mkf(ListNode(0)).val)
 
 
 def reverseList_fati(head):
@@ -140,5 +164,5 @@ def reverseList_fati(head):
     return rev_list
 
 
-print(reverseList_fati(list_rev).val)
+#print(reverseList_fati(list_rev).val)
 
