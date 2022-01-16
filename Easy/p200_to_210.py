@@ -33,22 +33,24 @@ Constraints:
 1 <= n <= 2^31 - 1"""
 
 def isHappy_mkf(n: int) -> bool:
-    if n < 10:
-        sum = n
-        r_cur = 0
-    else:
-        sum = 0
-        r_cur = n
-    while r_cur > 0:
-        m = r_cur % 10
-        r_cur = r_cur//10
-        sum += m**2
-    if sum == 1:
-        return True
-    elif sum < 10:
-        return False
-    else:
-        return isHappy_mkf(sum)
+    """
+    Runtime: 35 ms, faster than 71.13% of Python3 online submissions for Happy Number.
+    Memory Usage: 14.3 MB, less than 48.95% of Python3 online submissions for Happy Number.
+    """
+    def next_number(n_):
+        out = 0
+        for ch in str(n_):
+            out += int(ch)**2
+        return out
+
+    visited_num = set()
+    cur = n
+    while cur not in visited_num:
+        visited_num.add(cur)
+        cur = next_number(cur)
+        if cur == 1:
+            return True
+    return False
 
 print(isHappy_mkf(100))
 print(isHappy_mkf(2))
