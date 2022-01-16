@@ -53,6 +53,8 @@ def isHappy_mkf(n: int) -> bool:
 print(isHappy_mkf(100))
 print(isHappy_mkf(2))
 print(isHappy_mkf(19))
+print(isHappy_mkf(99))
+
 
 # *******************************************************
 # ************  problem 5  (206 on LeetCode)  *************
