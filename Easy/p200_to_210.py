@@ -71,14 +71,13 @@ def isHappy_fati1(n) -> bool: ## Run time error for some cases!
 #print(isHappy_fati2(2))
 
 def isHappy_fati2(n) -> bool:
+
     prev = set()
     while n != 1:
         n = sum(list(map(lambda x: pow(int(x), 2), list(str(n)))))
-
         if n in prev:
             return False
         prev.add(n)
-
     else:
         return True
 
