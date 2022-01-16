@@ -32,6 +32,32 @@ Constraints:
 
 1 <= n <= 2^31 - 1"""
 
+def isHappy_mkf(n: int) -> bool:
+    """
+    Runtime: 35 ms, faster than 71.13% of Python3 online submissions for Happy Number.
+    Memory Usage: 14.3 MB, less than 48.95% of Python3 online submissions for Happy Number.
+    """
+    def next_number(n_):
+        out = 0
+        for ch in str(n_):
+            out += int(ch)**2
+        return out
+
+    visited_num = set()
+    cur = n
+    while cur not in visited_num:
+        visited_num.add(cur)
+        cur = next_number(cur)
+        if cur == 1:
+            return True
+    return False
+
+print(isHappy_mkf(100))
+print(isHappy_mkf(2))
+print(isHappy_mkf(19))
+print(isHappy_mkf(99))
+
+
 def isHappy_fati1(n) -> bool: ## Run time error for some cases!
     try:
         if n == 1:
@@ -146,8 +172,9 @@ def reverseList_mkf(head):
         return head
 
 
-#print(reverseList_mkf(list_rev).val)
-#print(reverseList_mkf(ListNode(0)).val)
+print(reverseList_mkf(list_rev).val)
+print(reverseList_mkf(ListNode(0)).val)
+
 
 
 def reverseList_fati(head):
@@ -164,5 +191,5 @@ def reverseList_fati(head):
     return rev_list
 
 
-#print(reverseList_fati(list_rev).val)
+print(reverseList_fati(list_rev).val)
 
