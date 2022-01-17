@@ -1,5 +1,5 @@
 # *******************************************************
-# ************  problem 6  (387 on LeetCode)  *************
+# ************  problem 7  (387 on LeetCode)  *************
 # *******************************************************
 """
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.

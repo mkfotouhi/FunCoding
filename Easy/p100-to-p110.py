@@ -1,5 +1,5 @@
 # *******************************************************
-# ************  problem 7  (100 on LeetCode)  *************
+# ************  problem 8  (100 on LeetCode)  *************
 # *******************************************************
 """
 Given the roots of two binary trees p and q, write a function to check if they are the same or not.
@@ -78,3 +78,15 @@ def isSameTree_Fati(p, q) -> bool:
     return flag
 print(isSameTree_Fati(p,q))
 
+
+def isSameTree_Salman(p, q) -> bool:
+    if p and q:
+        left = isSameTree_Salman(p.left, q.left)
+        right = isSameTree_Salman(p.right, q.right)
+        value = p.val == q.val
+        return all([left, right, value])
+    elif (p and not q) or (q and not p):
+        return False
+    else:
+        return True
+print(isSameTree_Salman(p,q))
