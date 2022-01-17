@@ -7,8 +7,8 @@ The set of problems considered from Leetcode:
 | 3 | 20| Valid Parentheses|
 | 4 | 21| Merge Two Sorted Lists|
 | 5 | 206| Reverse Linked List|
-| 6 | 387| First Unique Character in a String|
-| 7 | 155| Min Stack|
+| 6 | 155| Min Stack|
+| 7 | 387| First Unique Character in a String|
 | 8 | 100| Same Tree|
 | 9 | 111| Minimum Depth of Binary Tree|
 |10 | 13| Roman to Integer |
