@@ -1,5 +1,5 @@
 # *******************************************************
-# ************  problem 10 (202 on LeetCode)  *************
+# ************  problem 11 (202 on LeetCode)  *************
 # *******************************************************
 """
 Happy Number :)
@@ -57,6 +57,22 @@ print(isHappy_mkf(2))
 print(isHappy_mkf(19))
 print(isHappy_mkf(99))
 
+
+def isHappy_Salman(n: int) -> bool:
+    happy_list = []
+    while (True):
+        x = [int(i) for i in str(n)]
+        xx = sum(i * i for i in x)
+        if xx == 1:
+            return True
+        elif xx in happy_list:
+            return False
+        else:
+            happy_list.append(xx)
+            n = xx
+
+print(isHappy_Salman(100))
+print(isHappy_Salman(2))
 
 # *******************************************************
 # ************  problem 5  (206 on LeetCode)  *************
