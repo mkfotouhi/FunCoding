@@ -72,3 +72,22 @@ n3 = TreeNode(20, n1, n2)
 n4 = TreeNode(9)
 n5 = TreeNode(6, n4, n3)
 print(minDepth_mkf(n5))
+
+
+class Solution:
+    def minDepth_Salman(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        if root.left:
+            s_left = 1 + Solution().minDepth_Salman(root.left)
+        if root.right:
+            s_right = 1 + Solution().minDepth_Salman(root.right)
+        if not root.left and not root.right:
+            return 1
+        if not root.right:
+            s_right = s_left
+        if not root.left:
+            s_left = s_right
+        return min(s_left, s_right)
+
+print(Solution().minDepth_Salman(tree))
