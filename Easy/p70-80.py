@@ -30,3 +30,27 @@ Constraints:
 
 1 <= n <= 45
 """
+def climbStairs_mkf(n: int) -> int:
+    """
+    Runtime: 28 ms, faster than 85.44% of Python3 online submissions for Climbing Stairs.
+    Memory Usage: 14.3 MB, less than 11.66% of Python3 online submissions for Climbing Stairs.
+    """
+    memory_dict = dict()
+    def tree_depth(n):
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        if n in memory_dict:
+            return memory_dict[n]
+        memory_dict[n] = 0
+        memory_dict[n] = memory_dict[n] + tree_depth(n - 1)
+        memory_dict[n] = memory_dict[n] + tree_depth(n - 2)
+        return memory_dict[n]
+    return tree_depth(n)
+
+
+print(climbStairs_mkf(2))
+print(climbStairs_mkf(5))
+print(climbStairs_mkf(38))
+
