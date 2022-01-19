@@ -57,6 +57,18 @@ print(isHappy_mkf(2))
 print(isHappy_mkf(19))
 print(isHappy_mkf(99))
 
+def isHappy_fati(n) -> bool:
+
+    prev = set()
+    while n != 1:
+        n = sum(list(map(lambda x: pow(int(x), 2), list(str(n)))))
+        if n in prev:
+            return False
+        prev.add(n)
+    else:
+        return True
+print(isHappy_fati(19))
+
 
 def isHappy_Salman(n: int) -> bool:
     happy_list = []
