@@ -54,3 +54,25 @@ print(climbStairs_mkf(2))
 print(climbStairs_mkf(5))
 print(climbStairs_mkf(38))
 
+
+
+def climbStairs_fati(self, n: int) -> int:
+    """
+    Runtime: 43 ms, faster than 28.20% of Python3 online submissions for Climbing Stairs.
+    Memory Usage: 14.1 MB, less than 90.95% of Python3 online submissions for Climbing Stairs.
+    """
+    def factorial(n):
+        fact = 1
+        for i in range(1, n + 1):
+            fact = fact * i
+        return fact
+
+    rep_1 = n % 2
+    rep_2 = n // 2
+    sum_situ = 1  # for situation where all of them are 1
+    while rep_1 != n:
+        sum_situ += factorial(rep_2 + rep_1) / (factorial(rep_2) * factorial(rep_1))
+        rep_2 -= 1
+        rep_1 += 2
+
+    return int(sum_situ)
