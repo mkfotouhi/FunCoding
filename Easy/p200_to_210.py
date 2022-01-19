@@ -57,20 +57,7 @@ print(isHappy_mkf(2))
 print(isHappy_mkf(19))
 print(isHappy_mkf(99))
 
-
-def isHappy_fati1(n) -> bool: ## Run time error for some cases!
-    try:
-        if n == 1:
-            return True
-        else:
-            n = sum(list(map(lambda x: pow(int(x), 2), list(str(n)))))
-            return isHappy_fati1(n)
-    except RecursionError:
-        return False
-
-#print(isHappy_fati2(2))
-
-def isHappy_fati2(n) -> bool:
+def isHappy_fati(n) -> bool:
 
     prev = set()
     while n != 1:
@@ -81,7 +68,7 @@ def isHappy_fati2(n) -> bool:
     else:
         return True
 
-print(isHappy_fati2(19))
+print(isHappy_fati(19))
 # *******************************************************
 # ************  problem 5  (206 on LeetCode)  *************
 # *******************************************************
