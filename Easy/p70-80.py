@@ -56,7 +56,7 @@ print(climbStairs_mkf(38))
 
 
 
-def climbStairs_fati(self, n: int) -> int:
+def climbStairs_fati(n: int) -> int:
     """
     Runtime: 43 ms, faster than 28.20% of Python3 online submissions for Climbing Stairs.
     Memory Usage: 14.1 MB, less than 90.95% of Python3 online submissions for Climbing Stairs.
