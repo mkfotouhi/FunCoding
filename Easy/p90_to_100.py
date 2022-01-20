@@ -23,4 +23,16 @@ def inorderTraversal_salamn(root: Optional[TreeNode]) -> List[int]:
 
 
 def inorderTraversal_fati(root: Optional[TreeNode]) -> List[int]:
-    pass
+    def rec(root, lst): #I got some hints to solve it
+        if root:
+            # First recur on left child
+            rec(root.left, lst)
+
+            # then print the data of node
+            lst.append(root.val)
+
+            # now recur on right child
+            rec(root.right, lst)
+    lst = []
+    rec(root, lst)
+    return lst
