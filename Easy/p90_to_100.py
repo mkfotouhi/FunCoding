@@ -15,7 +15,21 @@ class TreeNode:
 
 
 def inorderTraversal_mkf(root: Optional[TreeNode]) -> List[int]:
-    pass
+    """
+    Runtime: 30 ms, faster than 74.35% of Python3 online submissions for Binary Tree Inorder Traversal.
+    Memory Usage: 14.2 MB, less than 48.24% of Python3 online submissions for Binary Tree Inorder Traversal.
+    """
+    if root is None:
+        return []
+    if (root.left is None) & (root.right is None):
+        return [root.val]
+    else:
+        return inorderTraversal_mkf(root.left) + [root.val] + inorderTraversal_mkf(root.right)
+
+
+root = TreeNode(1, None, TreeNode(2, TreeNode(3, None, None), None))
+print(inorderTraversal_mkf(root))
+print()
 
 
 def inorderTraversal_salamn(root: Optional[TreeNode]) -> List[int]:
@@ -23,7 +37,7 @@ def inorderTraversal_salamn(root: Optional[TreeNode]) -> List[int]:
 
 
 def inorderTraversal_fati(root: Optional[TreeNode]) -> List[int]:
-    def rec(root, lst): #I got some hints to solve it
+    def rec(root, lst):  # I got some hints to solve it
         if root:
             # First recur on left child
             rec(root.left, lst)
@@ -33,6 +47,7 @@ def inorderTraversal_fati(root: Optional[TreeNode]) -> List[int]:
 
             # now recur on right child
             rec(root.right, lst)
+
     lst = []
     rec(root, lst)
     return lst
