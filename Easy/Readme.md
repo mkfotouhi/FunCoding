@@ -14,3 +14,6 @@ The set of problems considered from Leetcode:
 |10 | 13| Roman to Integer |
 |11 | 202| Happy Number|
 |12 | 70| Climbing Stairs |
+|13 | 94|  Binary Tree Inorder Traversal|
+|14 | 766| Toeplitz Matrix|
+|15 | 118| Pascal's Triangle|
