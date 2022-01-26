@@ -35,7 +35,27 @@ from typing import List
 
 
 def maxSubArray_mkf(nums: List[int]) -> int:
-    pass
+    """
+    Runtime: 768 ms, faster than 63.73% of Python3 online submissions for Maximum Subarray.
+    Memory Usage: 28.8 MB, less than 33.71% of Python3 online submissions for Maximum Subarray.
+    """
+    out = nums[0]
+    prev = nums[0]
+    for i in range(1, len(nums)):
+        num = nums[i]
+        prev = max(num, prev + num)
+        out = max(out, prev)
+    return out
+
+
+print(maxSubArray_mkf([-1, 2, 1, -1, 4, -8, 10]))
+print(maxSubArray_mkf([1, 2, 3, 4]))
+print(maxSubArray_mkf([-1, -2, -3, 5, -4, 5, -10]))
+print(maxSubArray_mkf([1]))
+print(maxSubArray_mkf([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # 6
+print(maxSubArray_mkf([4, -1, 2, 1]))  # 6
+print(maxSubArray_mkf([5, 4, -1, 7, 8]))  # 23
+print(maxSubArray_mkf([-1, -2]))  # 23
 
 
 def maxSubArray_fati(nums: List[int]) -> int:
