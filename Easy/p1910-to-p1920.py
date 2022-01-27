@@ -21,6 +21,7 @@ Input: nums = [4,2,5,9,7,4,8]
 Output: 64
 Explanation: We can choose indices 3 and 6 for the first pair (9, 8) and indices 1 and 5 for the second pair (2, 4).
 The product difference is (9 * 8) - (2 * 4) = 64."""
+
 from typing import List
 
 
@@ -45,3 +46,4 @@ def maxProductDifference_mkf(nums: List[int]) -> int:
 
 print(maxProductDifference_mkf([4, 2, 5, 9, 7, 4, 8]))
 # print(maxProductDifference_mkf([5, 6, 2, 7, 4]))
+
