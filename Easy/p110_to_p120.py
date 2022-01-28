@@ -28,7 +28,7 @@ The number of nodes in the tree is in the range [0, 105].
 """
 
 # Definition for a binary tree node.
-from typing import Optional
+from typing import Optional, List
 
 
 class TreeNode:
@@ -118,3 +118,19 @@ Constraints:
 
 1 <= numRows <= 30
 """
+
+def generate_mkf(numRows: int) -> List[List[int]]:
+    out = [[1]]
+    for i in range(2, numRows + 1):
+        prev = out[i - 2]
+        mid = []
+        for j in range(len(prev) - 1):
+            mid.append(prev[j] + prev[j + 1])
+
+        out.append([1] + mid + [1])
+    return out
+
+print(generate_mkf(1))
+print(generate_mkf(2))
+print(generate_mkf(3))
+print(generate_mkf(4))
