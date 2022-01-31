@@ -63,6 +63,7 @@ def lengthOfLongestSubstring_1(s: str) -> int:
 
 print(lengthOfLongestSubstring_1("abcabcbb"))
 
+
 def lengthOfLongestSubstring_2(s: str) -> int:
     """
     Runtime: 93 ms, faster than 43.29% of Python3 online submissions for Longest Substring Without Repeating Characters.
@@ -84,6 +85,7 @@ def lengthOfLongestSubstring_2(s: str) -> int:
         len_max = max(len_max, end - start + 1)
         end = end + 1
     return len_max
+
 
 print(lengthOfLongestSubstring_1("abcabcbb"))
 
@@ -209,6 +211,166 @@ def moveZeroes(nums: List[int]) -> None:
             nums.remove(nums[i])
             nums.append(0)
 
+
 nums = [0, 0, 1, 0, 2, 0, 4, 0, 0]
 moveZeroes(nums)
 print(nums)
+
+# *******************************************************
+# ************  problem M4   *************
+# *******************************************************
+"""
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+ 
+
+Example 1:
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Example 2:
+
+Input: nums = []
+Output: []
+Example 3:
+
+Input: nums = [0]
+Output: []
+ 
+
+Constraints:
+
+0 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+"""
+
+
+def threeSum_bruteForce(nums: List[int]) -> List[List[int]]:
+    """
+    This solution is O(n3) in time and O(n) in space. This is too slow and is not acceptable!
+    """
+    out = []
+    seen = []
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            for k in range(j + 1, len(nums)):
+                # print(i, j, k)
+                if (nums[i] + nums[j] + nums[k] == 0) & ({nums[i], nums[j], nums[k]} not in seen):
+                    out.append([nums[i], nums[j], nums[k]])
+                    seen.append({nums[i], nums[j], nums[k]})
+
+    return out
+
+
+nums = [-1, 0, 1, 2, -1, -4]  # [[-1,-1,2],[-1,0,1]]
+print(threeSum_bruteForce(nums))
+
+
+def threeSum_sort(nums: List[int]) -> List[List[int]]:
+    """
+    Runtime: 1040 ms, faster than 60.27% of Python3 online submissions for 3Sum.
+    Memory Usage: 18.1 MB, less than 24.28% of Python3 online submissions for 3Sum.
+    This is a O(n2) time complexity solution. Also for space it is O(n2).
+    """
+
+    def twosums(num_list, ind, ans_list):
+        p1 = ind + 1
+        p2 = len(num_list) - 1
+        target = - num_list[ind]
+        while p1 < p2:
+            s = num_list[p1] + num_list[p2]
+            if s == target:
+                ans_list.append([num_list[ind], num_list[p1], num_list[p2]])
+                p1 += 1
+                p2 -= 1
+                while (p1 < p2) & (num_list[p1] == num_list[p1 - 1]):
+                    p1 += 1
+            elif s > target:
+                p2 -= 1
+            else:
+                p1 += 1
+
+    nums.sort()
+    ans = []
+    for i, num in enumerate(nums):
+
+        if num > 0:
+            break
+        if i == 0:
+            twosums(nums, i, ans)
+        elif nums[i - 1] != num:
+            twosums(nums, i, ans)
+    return ans
+
+
+nums = [-1, 0, 1, 2, -1, -4]  # [[-1,-1,2],[-1,0,1]]
+print('threeSum_sort:', threeSum_sort(nums))
+
+nums = [0, 0, 0, 0]  # [[-1,-1,2],[-1,0,1]]
+print(threeSum_sort(nums))
+
+
+def threeSum_nosort(nums: List[int]) -> List[List[int]]:
+    """
+    Runtime: 1239 ms, faster than 50.03% of Python3 online submissions for 3Sum.
+    Memory Usage: 18.5 MB, less than 11.45% of Python3 online submissions for 3Sum.
+    time complexity: O(n2), space complexity: O(n)
+    """
+    seen_val1 = set()
+    ans = set()
+    comp_dict = dict()
+    for i, n1 in enumerate(nums):
+        if n1 not in seen_val1:
+            seen_val1.add(n1)
+            for j, n2 in enumerate(nums[i + 1:]):
+                needed = -(n1 + n2)
+                if needed in comp_dict:
+                    if comp_dict[needed] == i:
+                        ans.add(tuple(sorted((n1, n2, needed))))
+                else:
+                    comp_dict[n2] = i
+    return ans
+
+
+nums = [-1, 0, 1, 2, -1, -4]  # [[-1,-1,2],[-1,0,1]]
+print('threeSum_nosort:', threeSum_nosort(nums))
+
+
+def threeSum(nums: List[int]) -> List[List[int]]:
+    """
+    This is a O(n2) time complexity solution. Also for space it is O(n2).
+    But this also Timeout at submission!
+    """
+    # comp_dict = dict()
+    # for i, num in enumerate(nums):
+    #     if num not in comp_dict:
+    #         comp_dict[num] = i
+    comp_dict = dict()
+    seen = []
+    out = []
+    for i, num1 in enumerate(nums):
+        for j in range(i + 1, len(nums)):
+            num2 = nums[j]
+            s = num1 + num2
+            if s in comp_dict:
+                comp_dict[s].append([i, j])
+            else:
+                comp_dict[s] = [[i, j]]
+    for i, num in enumerate(nums):
+        needed = 0 - num
+        if needed in comp_dict:
+            for k in range(len(comp_dict[needed])):
+                ind1 = comp_dict[needed][k][0]
+                ind2 = comp_dict[needed][k][1]
+                if (i != ind1) & (i != ind2) & ({nums[i], nums[ind1], nums[ind2]} not in seen):
+                    seen.append({nums[i], nums[ind1], nums[ind2]})
+                    n2 = nums[ind1]
+                    n3 = nums[ind2]
+                    out.append([num, n2, n3])
+    return out
+
+
+nums = [-1, 0, 1, 2, -1, -4]  # [[-1,-1,2],[-1,0,1]]
+print('threeSum:', threeSum(nums))
