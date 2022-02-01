@@ -81,3 +81,78 @@ def removeDuplicates_faster(nums: List[int]) -> int:
 
 print(removeDuplicates_faster([1, 1, 2]))
 print(removeDuplicates_faster([0,0,1,1,1,2,2,3,3,4]))
+
+
+# *******************************************************
+# ************  Leetcode 76   *************
+# *******************************************************
+
+"""
+Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+A substring is a contiguous sequence of characters within the string.
+
+ 
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+ 
+
+Constraints:
+
+m == s.length
+n == t.length
+1 <= m, n <= 105
+s and t consist of uppercase and lowercase English letters."""
+
+
+def minWindow_1(s: str, t: str) -> str:
+    def l2_in_l1(list1, list2):
+        for n in list2:
+            if list1.count(n) < list2.count(n):
+                return False
+        return True
+
+    min_len = max(len(s), len(t)) + 1
+    p1 = 0
+    p2 = 1
+
+    ind_list = []
+    main_ch = []
+    len_dict = dict()
+    for i, ch in enumerate(s):
+        if (ch in t):
+            main_ch.append(ch)
+            ind_list.append(i)
+    for i in range(len(main_ch)):
+        j = i
+        # print('i=', i, len_dict)
+        while j < len(main_ch):
+            # print('  j=', j, main_ch[i:j+1], list(t))
+            if l2_in_l1(main_ch[i:j + 1], list(t)):
+
+                len_w = ind_list[j] - ind_list[i]
+                if (len_w not in len_dict) and (len_w < min_len):
+                    len_dict[len_w] = [ind_list[i], ind_list[j]]
+                    min_len = len_w
+            j += 1
+
+    return s[len_dict[min_len][0]: len_dict[min_len][1] + 1] if len(len_dict) > 0 else ""
+
+print(minWindow_1('aaabbbbcaccdd', 'abcdd'))
