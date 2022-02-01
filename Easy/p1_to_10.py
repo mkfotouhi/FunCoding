@@ -115,7 +115,18 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
 """
 
 def twoSum(nums: List[int], target: int) -> List[int]:
-    pass
+    """
+    Runtime: 86 ms, faster than 57.89% of Python3 online submissions for Two Sum.
+    Memory Usage: 15.3 MB, less than 55.73% of Python3 online submissions for Two Sum.
+    This solution is an O(n) in time complexity and space.
+    """
+    comp_dict = dict()
+    for i, num in enumerate(nums):
+        if (target - num) in comp_dict:
+            return [i, comp_dict[target - num]]
+        else:
+            comp_dict[num] = i
+    return []
 
 
 print(twoSum(nums=[3, 2, 4], target=6))  # [1, 2]
