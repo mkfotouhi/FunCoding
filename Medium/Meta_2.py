@@ -48,6 +48,7 @@ Constraints:
 -100 <= nums[i] <= 100
 nums is sorted in non-decreasing order.
 """
+from collections import Counter
 from typing import List
 
 
@@ -79,9 +80,9 @@ def removeDuplicates_faster(nums: List[int]) -> int:
         nums[real_ind] = nums[i]
     return real_ind + 1
 
-print(removeDuplicates_faster([1, 1, 2]))
-print(removeDuplicates_faster([0,0,1,1,1,2,2,3,3,4]))
 
+print(removeDuplicates_faster([1, 1, 2]))
+print(removeDuplicates_faster([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))
 
 # *******************************************************
 # ************  Leetcode 76   *************
@@ -123,6 +124,11 @@ s and t consist of uppercase and lowercase English letters."""
 
 
 def minWindow_1(s: str, t: str) -> str:
+    """
+    This solution times out at some test cases!
+    Time complexity: O(n3)
+    """
+
     def l2_in_l1(list1, list2):
         for n in list2:
             if list1.count(n) < list2.count(n):
@@ -130,8 +136,6 @@ def minWindow_1(s: str, t: str) -> str:
         return True
 
     min_len = max(len(s), len(t)) + 1
-    p1 = 0
-    p2 = 1
 
     ind_list = []
     main_ch = []
@@ -155,4 +159,44 @@ def minWindow_1(s: str, t: str) -> str:
 
     return s[len_dict[min_len][0]: len_dict[min_len][1] + 1] if len(len_dict) > 0 else ""
 
+
 print(minWindow_1('aaabbbbcaccdd', 'abcdd'))
+
+
+def minWindow_2(s: str, t: str) -> str:
+    """
+    This solution times out at some test cases!
+    Time complexity: O(n3)
+    """
+    t_counter = Counter(t)
+    required = len(t_counter)
+    min_len = max(len(s), len(t)) + 1
+    ind_list = []
+    main_ch = []
+    len_dict = dict()
+
+    for i, ch in enumerate(s):
+        if (ch in t):
+            main_ch.append(ch)
+            ind_list.append(i)
+
+    for i in range(len(main_ch)):
+        j = i
+        window_counter = {}
+        formed = 0
+        while j < len(main_ch):
+            ch = main_ch[j]
+            window_counter[ch] = window_counter.get(ch, 0) + 1
+            if (ch in t_counter) and (window_counter[ch] == t_counter[ch]):
+                formed += 1
+            if formed == required:
+                len_w = ind_list[j] - ind_list[i]
+                if (len_w not in len_dict) and (len_w < min_len):
+                    len_dict[len_w] = [ind_list[i], ind_list[j]]
+                    min_len = len_w
+            j += 1
+
+    return s[len_dict[min_len][0]: len_dict[min_len][1] + 1] if len(len_dict) > 0 else ""
+
+
+print(minWindow_2('aaabbbbcaccdd', 'abcdd'))
