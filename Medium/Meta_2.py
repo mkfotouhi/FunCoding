@@ -204,7 +204,7 @@ print('jhfk')
 
 
 # *******************************************************
-# ************  Leetcode 26   *************
+# ************  Leetcode 238   *************
 # *******************************************************
 """
 Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
@@ -257,3 +257,5 @@ def productExceptSelf(nums: List[int]) -> List[int]:
     for i in range(len(nums)):
         out.append(dict_rl[i] * dict_lr[i])
     return out
+
+print(productExceptSelf([1,2,3,4])) # [24,12,8,6]
