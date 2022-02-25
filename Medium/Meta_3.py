@@ -41,6 +41,7 @@ def isPalindrome(s: str) -> bool:
             return False
     return True
 
+
 print(isPalindrome("A man, a plan, a canal: Panama"))
 
 # *******************************************************
@@ -87,4 +88,27 @@ def myPow(x: float, n: int) -> float:
         x = 1 / x
     return fastPow(x, n)
 
+
 print(myPow(2, 10), myPow(2, -4))
+
+
+def myPow_iterative(x, n):
+    if n < 0:
+        n = -n
+        x = 1 / x
+    if n == 0:
+        return 1
+    steps = []
+    p = n
+    while p > 0:
+        steps.append(p)
+        p = p // 2
+
+    steps.reverse()
+    val = 1
+    for step in steps:
+        if step % 2 == 1:
+            val = val * val * x
+        else:
+            val = val * val
+    return val
