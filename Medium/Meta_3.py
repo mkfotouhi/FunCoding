@@ -31,6 +31,7 @@ Constraints:
 1 <= s.length <= 2 * 105
 s consists only of printable ASCII characters.
 """
+from typing import List
 
 
 def isPalindrome(s: str) -> bool:
@@ -112,3 +113,46 @@ def myPow_iterative(x, n):
         else:
             val = val * val
     return val
+
+# *******************************************************
+# ************  Leetcode 56   *************
+# *******************************************************
+"""
+Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+ 
+
+Example 1:
+
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+Example 2:
+
+Input: intervals = [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+ 
+
+Constraints:
+
+1 <= intervals.length <= 104
+intervals[i].length == 2
+0 <= starti <= endi <= 104
+"""
+
+
+def merge(intervals: List[List[int]]) -> List[List[int]]:
+    intervals = sorted(intervals)
+    # print(intervals)
+    out = [intervals[0]]
+    for i in range(1, len(intervals)):
+        new = intervals[i]
+        cur = out[-1]
+        if cur[1] >= new[0]:  # ovrlap
+            out[-1] = [min(cur[0], new[0]), max(cur[1], new[1])]
+        else:
+            out.append(new)
+    return out
+
+print(merge([[1,3],[2,6],[8,10],[15,18]]))
