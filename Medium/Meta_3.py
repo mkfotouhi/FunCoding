@@ -156,3 +156,80 @@ def merge(intervals: List[List[int]]) -> List[List[int]]:
     return out
 
 print(merge([[1,3],[2,6],[8,10],[15,18]]))
+
+
+# *******************************************************
+# ************  Leetcode 162   *************
+# *******************************************************
+
+"""
+A peak element is an element that is strictly greater than its neighbors.
+
+Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that nums[-1] = nums[n] = -∞.
+
+You must write an algorithm that runs in O(log n) time.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+Example 2:
+
+Input: nums = [1,2,1,3,5,6,4]
+Output: 5
+Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+ 
+
+Constraints:
+
+1 <= nums.length <= 1000
+-231 <= nums[i] <= 231 - 1
+nums[i] != nums[i + 1] for all valid i.
+"""
+
+
+def findPeakElement(nums: List[int]) -> int:
+    if len(nums) == 1:
+        return 0
+    if len(nums) == 2:
+        if nums[0] > nums[1]:
+            return 0
+        else:
+            return 1
+
+    ind_mid = len(nums) // 2
+    mid = nums[ind_mid]
+    # print(nums)
+    # print('ind=', ind_mid, 'mid=', mid)
+    if mid > nums[ind_mid - 1]:
+        return findPeakElement(nums[ind_mid:len(nums)]) + ind_mid
+    else:
+        return findPeakElement(nums[0:ind_mid])
+
+print(findPeakElement([1, 2, 3, 2, 4]))
+
+def findPeakElement_iterative(nums: List[int]) -> int:
+    ind = 0
+    while len(nums) > 2:
+        ind_mid = len(nums) // 2
+        mid = nums[ind_mid]
+        # print(nums)
+        # print('ind=', ind_mid, 'mid=', mid)
+        if mid > nums[ind_mid - 1]:
+            nums = nums[ind_mid:len(nums)]
+            ind = ind + ind_mid
+        else:
+            nums = nums[0:ind_mid]
+    if len(nums) == 1:
+        return ind
+    if nums[0] > nums[1]:
+        return ind
+    else:
+        return ind + 1
+
+print(findPeakElement_iterative([1, 2, 3, 2, 4]))
