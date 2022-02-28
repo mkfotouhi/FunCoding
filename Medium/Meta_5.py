@@ -53,6 +53,7 @@ def reverse(head):
 
         cur = cur.next
         i += 1
+    temp_even.reverse()
     out = out + temp_even
 
     return createLinkedList(out)
