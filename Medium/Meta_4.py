@@ -180,8 +180,8 @@ def rotationalCipher(input, rotation_factor):
 
     return out
 
-print(rotationalCipher("All-convoYs-9-be:Alert1.", 4)) # "Epp-gsrzsCw-3-fi:Epivx5."
 
+print(rotationalCipher("All-convoYs-9-be:Alert1.", 4))  # "Epp-gsrzsCw-3-fi:Epivx5."
 
 """
 Matching Pairs
@@ -228,9 +228,9 @@ def matching_pairs(s, t):
                 max_count = count
     return max_count
 
+
 print(matching_pairs("abcd", "adcb"))
 print(matching_pairs("abcd", "abcd"))
-
 
 
 def matching_pairs_n(s, t):
@@ -256,6 +256,49 @@ def matching_pairs_n(s, t):
                 count += 1
 
 
+# print(matching_pairs_n("abcd", "adcb"))
+# print(matching_pairs_n("abcd", "abcd"))
 
-print(matching_pairs_n("abcd", "adcb"))
-print(matching_pairs_n("abcd", "abcd"))
+"""
+Minimum Length Substrings
+You are given two strings s and t. You can select any substring of string s and rearrange the characters of the selected substring. Determine the minimum length of the substring of s such that string t is a substring of the selected substring.
+Signature
+int minLengthSubstring(String s, String t)
+Input
+s and t are non-empty strings that contain less than 1,000,000 characters each
+Output
+Return the minimum length of the substring of s. If it is not possible, return -1
+Example
+s = "dcbefebce"
+t = "fd"
+output = 5
+Explanation:
+Substring "dcbef" can be rearranged to "cfdeb", "cefdb", and so on. String t is a substring of "cfdeb". Thus, the minimum length required is 5."""
+
+
+def min_length_substring(s, t):
+    # Write your code here
+    dict_t = dict()
+    for i in range(len(s)):
+        if s[i] in t:
+            if s[i] in dict_t:
+                dict_t[s[i]].append(i)
+            else:
+                dict_t[s[i]] = [i]
+    print(dict_t)
+    mins = []
+    maxs = []
+    for key in dict_t:
+        mins.append(min(dict_t[key]))
+        maxs.append(max(dict_t[key]))
+    abs_min = min(mins)
+    abs_maxs = max(maxs)
+    min_maxs = min(maxs)
+    max_mins = max(mins)
+    # print(min_maxs, max_mins)
+    return max(min_maxs, max_mins) - min(min_maxs, max_mins) + 1
+
+
+# print(min_length_substring("dcbefebce", "fd"))
+print('-'*30)
+print(min_length_substring("bfbeadbcbcbfeaaeefcddcccbbbfaaafdbebedddf", "cbccfafebccdccebdd"))
