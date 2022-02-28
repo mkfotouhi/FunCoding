@@ -127,4 +127,135 @@ def count_subarrays(arr):
         out.append(count)
     return out
 
+
 print(count_subarrays([3, 4, 1, 6, 2]))
+
+"""
+Rotational Cipher
+One simple way to encrypt a string is to "rotate" every alphanumeric character by a certain amount. Rotating a character means replacing it with another character that is a certain number of steps away in normal alphabetic or numerical order.
+For example, if the string "Zebra-493?" is rotated 3 places, the resulting string is "Cheud-726?". Every alphabetic character is replaced with the character 3 letters higher (wrapping around from Z to A), and every numeric character replaced with the character 3 digits higher (wrapping around from 9 to 0). Note that the non-alphanumeric characters remain unchanged.
+Given a string and a rotation factor, return an encrypted string.
+Signature
+string rotationalCipher(string input, int rotationFactor)
+Input
+1 <= |input| <= 1,000,000
+0 <= rotationFactor <= 1,000,000
+Output
+Return the result of rotating input a number of times equal to rotationFactor.
+Example 1
+input = Zebra-493?
+rotationFactor = 3
+output = Cheud-726?
+Example 2
+input = abcdefghijklmNOPQRSTUVWXYZ0123456789
+rotationFactor = 39
+output = nopqrstuvwxyzABCDEFGHIJKLM9012345678
+"""
+
+
+def rotationalCipher(input, rotation_factor):
+    # Write your code here
+    out = ""
+    for ch in input:
+        print('----------------')
+        print('char:', ch)
+        if ch.isdigit():
+            r = rotation_factor % 10
+            out = out + chr(ord('0') + (ord(ch) - ord('0') + r) % 10)
+            print(f'   ch is digit, r={r}, out={out}')
+        elif ch.isalpha():
+            r = rotation_factor % 26
+            is_upper = True
+            if ch.islower():
+                is_upper = False
+            cur = ch.lower()
+            cur = chr(ord('a') + (ord(cur) - ord('a') + r) % 26)
+            print(f'   ch is alpha, r={r}, isupper={is_upper}, cur={cur}')
+            if is_upper:
+                cur = cur.upper()
+            out = out + cur
+            print(f'   out={out}')
+        else:
+            out = out + ch
+
+    return out
+
+print(rotationalCipher("All-convoYs-9-be:Alert1.", 4)) # "Epp-gsrzsCw-3-fi:Epivx5."
+
+
+"""
+Matching Pairs
+Given two strings s and t of length N, find the maximum number of possible matching pairs in strings s and t after swapping exactly two characters within s.
+A swap is switching s[i] and s[j], where s[i] and s[j] denotes the character that is present at the ith and jth index of s, respectively. The matching pairs of the two strings are defined as the number of indices for which s[i] and t[i] are equal.
+Note: This means you must swap two characters at different indices.
+Signature
+int matchingPairs(String s, String t)
+Input
+s and t are strings of length N
+N is between 2 and 1,000,000
+Output
+Return an integer denoting the maximum number of matching pairs
+Example 1
+s = "abcd"
+t = "adcb"
+output = 4
+Explanation:
+Using 0-based indexing, and with i = 1 and j = 3, s[1] and s[3] can be swapped, making it  "adcb".
+Therefore, the number of matching pairs of s and t will be 4.
+Example 2
+s = "mno"
+t = "mno"
+output = 1
+Explanation:
+Two indices have to be swapped, regardless of which two it is, only one letter will remain the same. If i = 0 and j=1, s[0] and s[1] are swapped, making s = "nmo", which shares only "o" with t.
+"""
+
+
+def matching_pairs(s, t):
+    # Write your code here
+    max_count = 0
+
+    for i in range(len(s)):
+        for j in range(i + 1, len(s)):
+            # print(i, j)
+            temp = list(s)
+            temp[i], temp[j] = temp[j], temp[i]
+            count = 0
+            for k in range(len(t)):
+                if temp[k] == t[k]:
+                    count += 1
+            if count > max_count:
+                max_count = count
+    return max_count
+
+print(matching_pairs("abcd", "adcb"))
+print(matching_pairs("abcd", "abcd"))
+
+
+
+def matching_pairs_n(s, t):
+    # Write your code here
+    pair_off = set()
+    s_off = set()
+    t_off = set()
+    count = 0
+    search_flag = True
+    for i in range(len(s)):
+        if s[i] == t[i]:
+            count += 1
+        else:
+            if not search_flag:
+                continue
+            pair_off.add((s[i], t[i]))
+            s_off.add(s[i])
+            t_off.add(t[i])
+            if (t[i], s[i]) in pair_off:
+                count += 2
+                search_flag = False
+            elif (s[i] in t_off) or (t[i] in s_off):
+                count += 1
+
+
+
+print(matching_pairs_n("abcd", "adcb"))
+print(matching_pairs_n("abcd", "abcd"))
