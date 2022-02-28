@@ -71,5 +71,56 @@ def createLinkedList(arr):
             head = head.next
     return tempHead
 
+
 head_1 = createLinkedList([1, 2, 8, 9, 12, 16])
 print(reverse(head_1))
+
+"""
+Pair Sums
+Given a list of n integers arr[0..(n-1)], determine the number of different pairs of elements within it which sum to k.
+If an integer appears in the list multiple times, each copy is considered to be different; that is, two pairs are considered different if one pair includes at least one array index which the other doesn't, even if they include the same values.
+Signature
+int numberOfWays(int[] arr, int k)
+Input
+n is in the range [1, 100,000].
+Each value arr[i] is in the range [1, 1,000,000,000].
+k is in the range [1, 1,000,000,000].
+Output
+Return the number of different pairs of elements which sum to k.
+Example 1
+n = 5
+k = 6
+arr = [1, 2, 3, 4, 3]
+output = 2
+The valid pairs are 2+4 and 3+3.
+Example 2
+n = 5
+k = 6
+arr = [1, 5, 3, 3, 3]
+output = 4
+There's one valid pair 1+5, and three different valid pairs 3+3 (the 3rd and 4th elements, 3rd and 5th elements, and 4th and 5th elements).
+"""
+
+
+def numberOfWays(arr, k):
+    # Write your code here
+    val_dict = dict()
+    for i in range(len(arr)):
+        num = arr[i]
+        if num in val_dict.keys():
+            val_dict[num].append(i)
+        else:
+            val_dict[num] = [i]
+
+    count = 0
+    for i in range(len(arr)):
+        rem = k - arr[i]
+        if rem in val_dict.keys():
+            inds = val_dict[rem]
+            for j in range(len(inds)):
+                if inds[j] > i:
+                    count += 1
+    return count
+
+
+print(numberOfWays([1, 5, 3, 3, 3], 6))
